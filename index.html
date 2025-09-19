@@ -1,3 +1,11 @@
+<!-- Chosen Palette: A nostalgic, archival palette using a soft off-white (#F0F2F5) for the background and a dark, deep charcoal (#1E293B) for text. The sidebar and key elements are in a muted, sophisticated blue-gray (#2D3748), with a subtle goldenrod (#ECC94B) as a restrained accent. This scheme mimics a classic digital archive, creating a professional and intellectually serious tone. -->
+<!-- Application Structure Plan: The application is designed as a single-page interactive portfolio with a fixed navigation sidebar on the left. This provides persistent, intuitive access to all content. The main content area dynamically updates to display one of three primary views: a compelling landing page, a curated portfolio section with a dedicated page for each paper, or a professional "About Me" summary. This structure is intended to guide a user through a logical and engaging exploration of the work, moving from a high-level philosophical argument to specific, documented research. The seamless transition between views translates a large volume of content into a digestible and interactive experience. -->
+<!-- Visualization & Content Choices:
+1. Research Overview: Info -> The core philosophy of the H.O.P. framework. Goal -> To immediately hook the reader by framing the research around a central, unresolved paradox in AGI. Presentation Method -> A bold, authoritative headline paired with a substantial, professional summary presented in a single, vertically stacked column. Justification -> This approach is more inviting and less confrontational, presenting the content in a dynamic, scannable format that sets a collaborative tone for the portfolio. Library/Method -> Semantic HTML with comprehensive Tailwind styling.
+2. Research Papers: Info -> Six foundational papers. Goal -> To provide a professional, easily navigable gallery of your work. Presentation Method -> A responsive grid of meticulously styled cards. Each card contains a a formal title, a concise abstract, and a prominent link to the full document. The design of this section is intended to convey substance and curation, moving beyond a simple list to a professional gallery. Justification -> The card design uses whitespace and visual hierarchy to prevent the section from feeling empty, making the portfolio look complete and intentional. Library/Method -> Tailwind grid for responsiveness and standard <a> tags for links.
+3. About Me Section: Info -> Professional bio, photo, and resume link. Goal -> To provide a personal and professional context for the research. Presentation Method -> A clean, two-column responsive layout, featuring a professional photo paired with a well-written biography and a clear call-to-action button. Justification -> This is a standard, effective, and visually appealing format for communicating professional credentials. Library/Method -> Tailwind flexbox.
+All interactions for tab switching are powered by clean, minimal JavaScript, ensuring a fast and fluid user experience without the need for external libraries. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Roboto Mono', monospace; }
+        .tab-button {
+            height: 2.5rem; /* Standard height for buttons */
+            padding-left: 1rem;
+            padding-right: 1rem;
+            display: flex;
+            align-items: center;
+        }
         .tab-button.active {
             background-color: #ECC94B;
             color: #1A202C;
@@ -93,12 +108,12 @@
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
         
         const papers = [
-            { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "comprehensive overview.pdf", summary: "A foundational document specifying the **H.O.P.** architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Core" },
-            { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "global consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "H.O.P. Funnel" },
-            { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "Economics of MetagocitionV3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within **H.O.P.**, treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "H.O.P. Economics" },
-            { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "realistic compute.pdf", summary: "This paper presents a computationally tractable specification for the **H.O.P.** architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "H.O.P. Compute" },
-            { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "The Adaptive Mind" },
-            { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "Comp. Metaphysics" }
+            { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "papers/comprehensive overview.pdf", summary: "A foundational document specifying the **H.O.P.** architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Core" },
+            { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "papers/global consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "H.O.P. Funnel" },
+            { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "papers/Economics of MetagocitionV3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within **H.O.P.**, treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "H.O.P. Economics" },
+            { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "papers/realistic compute.pdf", summary: "This paper presents a computationally tractable specification for the **H.O.P.** architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "H.O.P. Compute" },
+            { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "The Adaptive Mind" },
+            { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "Comp. Metaphysics" }
         ];
 
         const renderPaperTabs = () => {
