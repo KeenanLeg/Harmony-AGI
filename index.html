@@ -29,7 +29,6 @@
 <body class="bg-[#F0F2F5] text-[#1E293B] antialiased">
 
     <div class="flex flex-col md:flex-row min-h-screen">
-        <!-- Tabs Column -->
         <aside class="w-full md:w-80 bg-[#2D3748] text-[#F0F2F5] shadow-xl p-6 md:p-10 flex flex-col md:fixed md:h-screen md:overflow-y-auto">
             <div class="flex-grow">
                 <h1 class="text-3xl font-bold leading-tight">Keenan Rogerson Leagett</h1>
@@ -38,7 +37,6 @@
                     <button id="tab-landing" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 active text-sm">
                         Research Overview
                     </button>
-                    <!-- Dynamically generated paper tabs -->
                     <div id="paper-tabs" class="space-y-3"></div>
                     <button id="tab-about" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
                         About Me
@@ -50,7 +48,6 @@
             </div>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="flex-grow p-6 md:p-16 md:ml-80">
             <div id="content-landing" class="content-section">
                 <h2 class="text-5xl font-bold mb-8 leading-tight">Toward a Foundational Theory of Intelligence: Navigating the Unbounded</h2>
@@ -100,12 +97,12 @@
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
         
         const papers = [
-    { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "https://raw.githubusercontent.com/keenanleg/harmony-agi/main/Harmony-AGI-main/papers/comprehensive_overview.pdf", summary: "A foundational document specifying the **H.O.P.** architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Core" },
-    { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "https://raw.githubusercontent.com/keenanleg/harmony-agi/main/Harmony-AGI-main/papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "H.O.P. Funnel" },
-    { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "https://raw.githubusercontent.com/keenanleg/harmony-agi/main/Harmony-AGI-main/papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within **H.O.P.**, treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "H.O.P. Economics" },
-    { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "https://raw.githubusercontent.com/keenanleg/harmony-agi/main/Harmony-AGI-main/papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the **H.O.P.** architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "H.O.P. Compute" },
-    { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "https://raw.githubusercontent.com/keenanleg/harmony-agi/main/Harmony-AGI-main/papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "The Adaptive Mind" },
-    { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "https://raw.githubusercontent.com/keenanleg/harmony-agi/main/Harmony-AGI-main/papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "Comp. Metaphysics" }
+    { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "Harmony-AGI-main/papers/comprehensive_overview.pdf", summary: "A foundational document specifying the **H.O.P.** architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Core" },
+    { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "Harmony-AGI-main/papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "H.O.P. Funnel" },
+    { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "Harmony-AGI-main/papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within **H.O.P.**, treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "H.O.P. Economics" },
+    { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "Harmony-AGI-main/papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the **H.O.P.** architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "H.O.P. Compute" },
+    { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "Harmony-AGI-main/papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "The Adaptive Mind" },
+    { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "Harmony-AGI-main/papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "Comp. Metaphysics" }
 ];
 
         const renderPaperTabs = () => {
@@ -153,7 +150,16 @@
                 tab.addEventListener('click', () => {
                     const targetId = tab.id.replace('tab-', 'content-');
                     const targetSection = document.getElementById(targetId);
-                    setActiveTab(tab.id, targetSection);
+                    
+                    if (tab.id.startsWith('tab-paper')) {
+                        const paperId = tab.id.replace('tab-', '');
+                        const paper = papers.find(p => p.id === paperId);
+                        if (paper) {
+                            showPaperViewer(paper.file, paper.title, paper.summary, tab.id);
+                        }
+                    } else {
+                        setActiveTab(tab.id, targetSection);
+                    }
                 });
             });
 
@@ -171,6 +177,3 @@
     </script>
 </body>
 </html>
-
-
-
