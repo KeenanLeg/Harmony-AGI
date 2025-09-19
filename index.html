@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keenan Rogerson Leggett - Ai Researcher and Information Architect</title>
+    <title>Keenan Leggett - AI Researcher and Information Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -50,13 +50,13 @@
 
         <main class="flex-grow p-6 md:p-16 md:ml-80">
             <div id="content-landing" class="content-section">
-                <h2 class="text-5xl font-bold mb-8 leading-tight">Toward a Foundational Theory of Intelligence: Navigating the Unbounded</h2>
+                <h2 class="text-5xl font-bold mb-8 leading-tight">The Harmony Optimization Protocol</h2>
                 <div class="max-w-6xl mx-auto space-y-8">
                     <p class="text-lg leading-relaxed text-gray-700">
-                        In the pursuit of Artificial General Intelligence, a central challenge persists: how can a system, operating with finite computational resources, achieve true, open-ended intelligence? The theoretical ideal of an all-knowing machine is a state of unbounded complexity, confronting researchers with the problem of infinite regress. My work addresses this question not by pursuing the theoretical ideal of an all-knowing machine, but by positing a more viable, biologically-grounded alternative.
+                        The Harmony Optimization Protocol (H.O.P.) is a computational architecture for Artificial General Intelligence (AGI) that moves beyond traditional goal-oriented systems. Rather than relentlessly pursuing a singular objective, the H.O.P. AGI is driven by an internal, information-theoretic signal of inconsistency. The system processes this signal to modulate its cognitive parameters and select appropriate operational modes, such as "Curiosity" or "Anxiety".
                     </p>
                     <p class="text-lg leading-relaxed text-gray-700">
-                        The Harmony Optimization Protocol (H.O.P.) is a complete intellectual framework grounded in a single, uncompromising principle: true intelligence is driven not by external goals, but by the intrinsic drive to minimize its own internal inconsistencies. The H.O.P. presents a viable, biologically-grounded alternative for AGI. It is a framework for an ideally budgeted cognitive system that, like a living organism, thrives not by knowing everything, but by intelligently managing the unbounded nature of reality through constant self-correction.
+                        This framework presents a viable, biologically-grounded alternative for AGI, positing that a true general intelligence is driven by the intrinsic need for internal coherence rather than external goals. It provides a rigorous, engineering-focused blueprint for a thinking machine that learns to intelligently manage the complex trade-offs of its own cognitive resources in a complex and uncertain world.
                     </p>
                 </div>
             </div>
@@ -67,6 +67,11 @@
                     <p id="paper-viewer-description" class="text-lg text-gray-700"></p>
                 </div>
                 <iframe id="paper-viewer-frame" class="pdf-viewer shadow-xl rounded-xl"></iframe>
+                <div id="ios-link-container" class="mt-4 md:hidden">
+                    <a id="ios-link" href="#" target="_blank" class="inline-block bg-[#ECC94B] text-[#1A202C] font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#FCD34D] transition-colors duration-200 text-sm">
+                        View Full PDF
+                    </a>
+                </div>
             </div>
 
             <div id="content-about" class="content-section hidden">
@@ -97,10 +102,10 @@
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
         
         const papers = [
-    { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "./papers/comprehensive_overview.pdf", summary: "A foundational document specifying the **H.O.P.** architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Core" },
+    { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "./papers/comprehensive_overview.pdf", summary: "A foundational document specifying the H.O.P. architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Core" },
     { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "H.O.P. Funnel" },
-    { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "./papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within **H.O.P.**, treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "H.O.P. Economics" },
-    { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "./papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the **H.O.P.** architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "H.O.P. Compute" },
+    { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "./papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within H.O.P., treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "H.O.P. Economics" },
+    { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "./papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the H.O.P. architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "H.O.P. Compute" },
     { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "./papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "The Adaptive Mind" },
     { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "./papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "Comp. Metaphysics" }
 ];
@@ -122,6 +127,7 @@
             paperViewerDescription.textContent = summary;
             paperViewerFrame.src = file;
             setActiveTab(activeTabId, document.getElementById('content-paper-viewer'));
+            document.getElementById('ios-link').href = file;
         };
         
         const setActiveTab = (activeTabId, activeSection) => {
