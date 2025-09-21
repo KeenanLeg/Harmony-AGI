@@ -222,18 +222,27 @@
                 paperViewerFrame.src = file;
                 paperViewerFrame.classList.remove('hidden');
                 document.getElementById('ios-link-container').classList.remove('hidden');
+                // Make sure the preformatted content is hidden if a PDF is loaded
+                if (paperViewerFrame.contentDocument.body.querySelector('pre')) {
+                    paperViewerFrame.contentDocument.body.querySelector('pre').style.display = 'none';
+                }
             } else if (file.endsWith('.md')) {
                 fetch(file)
                     .then(response => response.text())
                     .then(markdown => {
-                        const content = document.createElement('pre');
+                        let content = paperViewerFrame.contentDocument.body.querySelector('pre');
+                        if (!content) {
+                            content = document.createElement('pre');
+                            paperViewerFrame.contentDocument.body.appendChild(content);
+                        }
                         content.textContent = markdown;
-                        content.classList.add('whitespace-pre-wrap', 'font-mono', 'text-gray-700');
-                        paperViewerFrame.contentDocument.body.innerHTML = '';
-                        paperViewerFrame.contentDocument.body.appendChild(content);
-                        
+                        content.classList.add('whitespace-pre-wrap', 'font-mono', 'text-gray-700', 'p-4');
+                        content.style.display = 'block';
+
                         paperViewerFrame.classList.remove('hidden');
                         document.getElementById('ios-link-container').classList.add('hidden');
+                        // Clear the iframe src to prevent a file from being displayed at the same time
+                        paperViewerFrame.src = 'about:blank';
                     });
             }
 
