@@ -1,8 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Default Meta Tags for the landing page -->
     <title>Keenan Leggett - AI Researcher and Information Architect</title>
+    <meta property="og:title" content="Keenan Leggett - AI Researcher and Information Architect">
+    <meta property="og:description" content="A portfolio of foundational work on the Harmony Optimization Protocol (H.O.P.), a new paradigm for Artificial General Intelligence.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keenanleggett.com">
+    <meta property="og:image" content="https://keenanleggett.com/images/headshot.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -34,13 +42,17 @@
                 <h1 class="text-3xl font-bold leading-tight">Keenan Rogerson Leggett</h1>
                 <p class="text-sm text-gray-400 mt-2 tracking-wide">AI Researcher & Information Architect</p>
                 <nav class="mt-12 space-y-3">
-                    <button id="tab-landing" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 active text-sm">
+                    <a id="tab-landing" href="#" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 active text-sm">
                         Research Overview
-                    </button>
+                    </a>
                     <div id="paper-tabs" class="space-y-3"></div>
-                    <button id="tab-about" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
+                    <a id="tab-app-papers-btn" href="#app-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
+                        Application Papers
+                    </a>
+                    <div id="application-paper-tabs" class="space-y-3 hidden"></div>
+                    <a id="tab-about" href="#about" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
                         About Me
-                    </button>
+                    </a>
                 </nav>
             </div>
             <div class="mt-12 text-sm text-gray-500">
@@ -106,7 +118,7 @@
                 
                 <div class="max-w-6xl mx-auto text-lg leading-relaxed text-gray-700 clearfix">
                     <div class="md:float-left md:w-1/3 md:pr-10">
-                        <img src="images/headshot.png.png" alt="Placeholder photo" class="rounded-full shadow-lg w-full max-w-xs mx-auto md:mx-0 mb-8 object-cover border-4 border-white">
+                        <img src="images/headshot.png" alt="Placeholder photo" class="rounded-full shadow-lg w-full max-w-xs mx-auto md:mx-0 mb-8 object-cover border-4 border-white">
                         <div class="text-gray-700 space-y-2 p-6 rounded-xl border border-gray-300 mb-8">
                             <h4 class="text-xl font-bold">Contact Info</h4>
                             <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/keenan-legget" target="_blank" class="text-[#ECC94B] hover:underline">linkedin.com/in/keenan-legget</a></p>
@@ -116,7 +128,7 @@
                     <div class="mt-8 md:mt-0 space-y-4">
                         <p>My path into Artificial General Intelligence wasn't a conventional one. It began not in a classroom, but through an innate drive to understand how complex systems function. My work is not a product of a single discipline, but a synthesis of disparate fields. I see the universe through a unified lens of group theory and topology, believing that all information—from the metaphysical to the neurological—is structured by a single set of universal principles. This core conviction is what drives my research and has guided my unwavering belief in the power of a self-correcting mindset.</p>
                         <p>I realized that a truly intelligent system, like a human, must be able to confront and resolve its own internal inconsistencies. The drive for internal harmony is a far more robust foundation for intelligence than the relentless pursuit of an external, often incomplete, goal. This understanding of self-correction and dissonance is the very foundation of the Harmony Optimization Protocol. It is an architecture that is a direct reflection of my own journey toward coherence, resilience, and perpetual self-improvement.</p>
-                        <p>TThis understanding of self-correction and dissonance is the very foundation of my work. My journey toward building this project was a direct reflection of my own path toward coherence, resilience, and perpetual self-improvement. It is my definitive answer to a fundamental question: what would a truly robust, resilient, and intelligent system look like if it were built from first principles? By grounding it in a verifiable, internal signal, I believe we can shift our focus from external goals to a more profound, internal truth</p>
+                        <p>This understanding of self-correction and dissonance is the very foundation of my work. My journey toward building this project was a direct reflection of my own path toward coherence, resilience, and perpetual self-improvement. It is my definitive answer to a fundamental question: what would a truly robust, resilient, and intelligent system look like if it were built from first principles? By grounding it in a verifiable, internal signal, I believe we can shift our focus from external goals to a more profound, internal truth</p>
                     </div>
                 </div>
 
@@ -130,12 +142,42 @@
     <script>
         const tabs = document.querySelectorAll('.tab-button');
         const sections = document.querySelectorAll('.content-section');
-        const paperTabsContainer = document.getElementById('paper-tabs');
+        const corePaperTabsContainer = document.getElementById('paper-tabs');
+        const appPaperTabsContainer = document.getElementById('application-paper-tabs');
         const paperViewerTitle = document.getElementById('paper-viewer-title');
         const paperViewerDescription = document.getElementById('paper-viewer-description');
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
+
+        // Page Metadata for social media
+        const pageMetadata = {
+            '': {
+                title: "Keenan Leggett - AI Researcher and Information Architect",
+                description: "A portfolio of foundational work on the Harmony Optimization Protocol (H.O.P.), a new paradigm for Artificial General Intelligence.",
+                image: "images/headshot.png"
+            },
+            'about': {
+                title: "About Keenan Rogerson Leggett",
+                description: "Keenan Leggett's official portfolio page detailing his journey and philosophical approach to building Artificial General Intelligence.",
+                image: "images/headshot.png"
+            },
+            'app1': {
+                title: "H.O.P. as an Aesthetic Engine",
+                description: "A paper on a new framework for algorithmic art curation and discovery rooted in the Harmony Optimization Protocol.",
+                image: "images/aesthetic_engine.png" // Placeholder image for the aesthetic paper
+            },
+            'app2': {
+                title: "Decoherence as Dissonance Resolution",
+                description: "A novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance.",
+                image: "images/decoherence_dissonance.png" // Placeholder image for the decoherence paper
+            },
+            'app3': {
+                title: "Educational Harmony",
+                description: "An AGI-driven educational framework that uses the H.O.P. to monitor and promote intellectual coherence in students, fostering a deeply ethical and auditable learning ecosystem.",
+                image: "images/educational_harmony.png" // Placeholder image for the education paper
+            }
+        };
         
-        const papers = [
+        const corePapers = [
             { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "./papers/comprehensive_overview.pdf", summary: "A foundational document specifying the H.O.P. architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Specification" },
             { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "Cognitive Funnel" },
             { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "./papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within H.O.P., treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "Cognitive Economics" },
@@ -144,24 +186,62 @@
             { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "./papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "A.G.I. Metaphysics" }
         ];
 
-        const renderPaperTabs = () => {
-            paperTabsContainer.innerHTML = '';
-            papers.forEach(paper => {
-                const button = document.createElement('button');
-                button.id = `tab-${paper.id}`;
-                button.classList.add('tab-button', 'w-full', 'text-left', 'p-2', 'rounded-md', 'font-medium', 'transition-all', 'duration-300', 'text-gray-300', 'hover:bg-gray-700', 'text-sm');
-                button.textContent = paper.abbreviated;
-                button.setAttribute('title', paper.title); // Pop-up on hover
-                paperTabsContainer.appendChild(button);
+        const appPapers = [
+            { id: 'app1', title: "The Harmony Optimization Protocol as an Aesthetic Engine: A Novel Framework for Algorithmic Art Curation and Discovery", file: "./papers/The Harmony Optimization Protocol as an Aesthetic Engine_ A Novel Framework for Algorithmic Art Curation and Discovery.pdf", summary: "This paper introduces a framework for algorithmic art curation and discovery rooted in H.O.P., proposing that artistic salience can be mechanistically understood and quantitatively assessed by an AGI.", abbreviated: "H.O.P. & Art" },
+            { id: 'app2', title: "Decoherence as Dissonance Resolution: A Metaphysical Topology for Quantum Systems", file: "./papers/decoherence.pdf", summary: "This paper proposes a novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance and maximize coherence.", abbreviated: "H.O.P. & Physics" },
+            { id: 'app3', title: "Educational Harmony: A Coherence-Based Model for Holistic Student Development", file: "./papers/educational_harmony.md", summary: "This paper presents an AGI-driven educational framework that uses the H.O.P. to monitor and promote intellectual coherence in students, fostering a deeply ethical and auditable learning ecosystem.", abbreviated: "H.O.P. & Education" }
+        ];
+        
+        // Function to update meta tags dynamically for social sharing
+        const setPageMetadata = (key) => {
+            const meta = pageMetadata[key] || pageMetadata[''];
+            document.title = meta.title;
+            document.querySelector('meta[property="og:title"]').setAttribute('content', meta.title);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', meta.description);
+            document.querySelector('meta[property="og:image"]').setAttribute('content', meta.image);
+            // Add other meta tags if needed for Twitter, etc.
+        };
+
+        const renderPaperTabs = (paperList, container) => {
+            paperList.forEach(paper => {
+                const a = document.createElement('a');
+                a.id = `tab-${paper.id}`;
+                a.href = `#${paper.id}`;
+                a.classList.add('tab-button', 'w-full', 'text-left', 'p-2', 'rounded-md', 'font-medium', 'transition-all', 'duration-300', 'text-gray-300', 'hover:bg-gray-700', 'text-sm');
+                a.textContent = paper.abbreviated;
+                a.setAttribute('title', paper.title);
+                container.appendChild(a);
             });
         };
 
         const showPaperViewer = (file, title, summary, activeTabId) => {
             paperViewerTitle.textContent = title;
             paperViewerDescription.textContent = summary;
-            paperViewerFrame.src = file;
+            
+            if (file.endsWith('.pdf')) {
+                paperViewerFrame.src = file;
+                paperViewerFrame.classList.remove('hidden');
+                document.getElementById('ios-link-container').classList.remove('hidden');
+            } else if (file.endsWith('.md')) {
+                fetch(file)
+                    .then(response => response.text())
+                    .then(markdown => {
+                        const content = document.createElement('pre');
+                        content.textContent = markdown;
+                        content.classList.add('whitespace-pre-wrap', 'font-mono', 'text-gray-700');
+                        paperViewerFrame.contentDocument.body.innerHTML = '';
+                        paperViewerFrame.contentDocument.body.appendChild(content);
+                        
+                        paperViewerFrame.classList.remove('hidden');
+                        document.getElementById('ios-link-container').classList.add('hidden');
+                    });
+            }
+
             setActiveTab(activeTabId, document.getElementById('content-paper-viewer'));
             document.getElementById('ios-link').href = file;
+
+            // Update metadata for the current paper
+            setPageMetadata(activeTabId.replace('tab-', ''));
         };
         
         const setActiveTab = (activeTabId, activeSection) => {
@@ -182,38 +262,59 @@
                 s.classList.toggle('hidden', s !== activeSection);
             });
         };
+        
+        const handleInitialLoad = () => {
+            const hash = window.location.hash.substring(1);
+            if (hash === 'about') {
+                setActiveTab('tab-about', document.getElementById('content-about'));
+                setPageMetadata('about');
+            } else if (hash) {
+                const appPaper = appPapers.find(p => p.id === hash);
+                const corePaper = corePapers.find(p => p.id === hash);
+                if (appPaper) {
+                    showPaperViewer(appPaper.file, appPaper.title, appPaper.summary, `tab-${appPaper.id}`);
+                    appPaperTabsContainer.classList.remove('hidden');
+                } else if (corePaper) {
+                    showPaperViewer(corePaper.file, corePaper.title, corePaper.summary, `tab-${corePaper.id}`);
+                } else {
+                    setActiveTab('tab-landing', document.getElementById('content-landing'));
+                }
+            } else {
+                setActiveTab('tab-landing', document.getElementById('content-landing'));
+            }
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderPaperTabs();
-            
-            document.querySelectorAll('.tab-button').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const targetId = tab.id.replace('tab-', 'content-');
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (tab.id.startsWith('tab-paper')) {
-                        const paperId = tab.id.replace('tab-', '');
-                        const paper = papers.find(p => p.id === paperId);
-                        if (paper) {
-                            showPaperViewer(paper.file, paper.title, paper.summary, tab.id);
-                        }
+            renderPaperTabs(corePapers, corePaperTabsContainer);
+            renderPaperTabs(appPapers, appPaperTabsContainer);
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const hash = this.getAttribute('href').substring(1);
+                    if (hash === 'about') {
+                        setActiveTab('tab-about', document.getElementById('content-about'));
+                        setPageMetadata('about');
+                    } else if (hash === 'app-papers') {
+                        appPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'landing') {
+                        setActiveTab('tab-landing', document.getElementById('content-landing'));
+                        setPageMetadata('');
                     } else {
-                        setActiveTab(tab.id, targetSection);
+                        const appPaper = appPapers.find(p => p.id === hash);
+                        const corePaper = corePapers.find(p => p.id === hash);
+                        if (appPaper) {
+                            showPaperViewer(appPaper.file, appPaper.title, appPaper.summary, `tab-${appPaper.id}`);
+                        } else if (corePaper) {
+                            showPaperViewer(corePaper.file, corePaper.title, corePaper.summary, `tab-${corePaper.id}`);
+                        }
                     }
                 });
             });
 
-            document.querySelectorAll('.paper-lead-in-card').forEach(card => {
-                card.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const index = event.currentTarget.dataset.paperIndex;
-                    const paper = papers[index];
-                    showPaperViewer(paper.file, paper.title, paper.summary, `tab-${paper.id}`);
-                });
-            });
-            
-            setActiveTab('tab-landing', document.getElementById('content-landing'));
+            handleInitialLoad();
         });
+
+        window.addEventListener('hashchange', handleInitialLoad);
     </script>
 </body>
 </html>
