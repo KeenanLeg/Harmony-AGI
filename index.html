@@ -49,6 +49,10 @@
                         Application Papers
                     </a>
                     <div id="application-paper-tabs" class="space-y-3 hidden"></div>
+                    <a id="tab-math-papers-btn" href="#math-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
+                        Mathematical Philosophy
+                    </a>
+                    <div id="math-paper-tabs" class="space-y-3 hidden"></div>
                     <a id="tab-about" href="#about" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
                         About Me
                     </a>
@@ -143,6 +147,7 @@
         const sections = document.querySelectorAll('.content-section');
         const corePaperTabsContainer = document.getElementById('paper-tabs');
         const appPaperTabsContainer = document.getElementById('application-paper-tabs');
+        const mathPaperTabsContainer = document.getElementById('math-paper-tabs');
         const paperViewerTitle = document.getElementById('paper-viewer-title');
         const paperViewerDescription = document.getElementById('paper-viewer-description');
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
@@ -181,14 +186,18 @@
             { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "Cognitive Funnel" },
             { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "./papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within H.O.P., treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "Cognitive Economics" },
             { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "./papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the H.O.P. architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "Practical H.O.P." },
-            { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "./papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "Neurobiological H.O.P." },
-            { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "./papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "A.G.I. Metaphysics" }
+            { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "./papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "Neurobiological H.O.P." }
         ];
 
         const appPapers = [
             { id: 'app1', title: "The Harmony Optimization Protocol as an Aesthetic Engine: A Novel Framework for Algorithmic Art Curation and Discovery", file: "./papers/The Harmony Optimization Protocol as an Aesthetic Engine_ A Novel Framework for Algorithmic Art Curation and Discovery.pdf", summary: "This paper introduces a framework for algorithmic art curation and discovery rooted in H.O.P., proposing that artistic salience can be mechanistically understood and quantitatively assessed by an AGI.", abbreviated: "H.O.P. & Art" },
             { id: 'app2', title: "Decoherence as Dissonance Resolution: A Metaphysical Topology for Quantum Systems", file: "./papers/decoherence.pdf", summary: "This paper proposes a novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance.", abbreviated: "H.O.P. & Physics" },
             { id: 'app3', title: "The Dissonance Engine of Education: A Foundational Re-Engineering for Human-Compatible Learning", file: "./papers/education.pdf", summary: "This paper presents an AGI-driven educational framework that uses the H.O.P. to monitor and promote intellectual coherence in students, fostering a deeply ethical and auditable learning ecosystem.", abbreviated: "H.O.P. & Education" }
+        ];
+
+        const mathPapers = [
+            { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "./papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "A.G.I. Metaphysics" },
+            { id: 'paper7', title: "A Formalism for Metaphysical Topological Computing", file: "./papers/godel.pdf", summary: "This paper provides a mathematical foundation for a model of reality where concepts are formal objects within a universal graph. It recasts Gödel's incompleteness theorems as structural properties of this graph and introduces a topological framework to analyze the logical structure of reality.", abbreviated: "Gödel & Metaphysics" }
         ];
         
         // Function to update meta tags dynamically for social sharing
@@ -279,11 +288,15 @@
             } else if (hash) {
                 const appPaper = appPapers.find(p => p.id === hash);
                 const corePaper = corePapers.find(p => p.id === hash);
+                const mathPaper = mathPapers.find(p => p.id === hash);
                 if (appPaper) {
                     showPaperViewer(appPaper.file, appPaper.title, appPaper.summary, `tab-${appPaper.id}`);
                     appPaperTabsContainer.classList.remove('hidden');
                 } else if (corePaper) {
                     showPaperViewer(corePaper.file, corePaper.title, corePaper.summary, `tab-${corePaper.id}`);
+                } else if (mathPaper) {
+                    showPaperViewer(mathPaper.file, mathPaper.title, mathPaper.summary, `tab-${mathPaper.id}`);
+                    mathPaperTabsContainer.classList.remove('hidden');
                 } else {
                     setActiveTab('tab-landing', document.getElementById('content-landing'));
                 }
@@ -295,6 +308,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderPaperTabs(corePapers, corePaperTabsContainer);
             renderPaperTabs(appPapers, appPaperTabsContainer);
+            renderPaperTabs(mathPapers, mathPaperTabsContainer);
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -304,16 +318,21 @@
                         setPageMetadata('about');
                     } else if (hash === 'app-papers') {
                         appPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'math-papers') {
+                        mathPaperTabsContainer.classList.toggle('hidden');
                     } else if (hash === 'landing') {
                         setActiveTab('tab-landing', document.getElementById('content-landing'));
                         setPageMetadata('');
                     } else {
                         const appPaper = appPapers.find(p => p.id === hash);
                         const corePaper = corePapers.find(p => p.id === hash);
+                        const mathPaper = mathPapers.find(p => p.id === hash);
                         if (appPaper) {
                             showPaperViewer(appPaper.file, appPaper.title, appPaper.summary, `tab-${appPaper.id}`);
                         } else if (corePaper) {
                             showPaperViewer(corePaper.file, corePaper.title, corePaper.summary, `tab-${corePaper.id}`);
+                        } else if (mathPaper) {
+                            showPaperViewer(mathPaper.file, mathPaper.title, mathPaper.summary, `tab-${mathPaper.id}`);
                         }
                     }
                 });
