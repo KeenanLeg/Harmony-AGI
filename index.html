@@ -41,7 +41,7 @@
                 <h1 class="text-3xl font-bold leading-tight">Keenan Rogerson Leggett</h1>
                 <p class="text-sm text-gray-400 mt-2 tracking-wide">AI Researcher & Information Architect</p>
                 <nav class="mt-12 space-y-3">
-                    <a id="tab-landing" href="#" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 active text-sm">
+                    <a id="tab-landing" href="#landing" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 active text-sm">
                         Research Overview
                     </a>
                     <div id="paper-tabs" class="space-y-3"></div>
@@ -53,6 +53,12 @@
                         Mathematical Philosophy
                     </a>
                     <div id="math-paper-tabs" class="space-y-3 hidden"></div>
+                    <!-- New Advanced Protocols Section -->
+                    <a id="tab-advanced-papers-btn" href="#advanced-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
+                        Advanced Protocols
+                    </a>
+                    <div id="advanced-paper-tabs" class="space-y-3 hidden"></div>
+                    <!-- End New Section -->
                     <a id="tab-about" href="#about" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-gray-300 hover:bg-gray-700 text-sm">
                         About Me
                     </a>
@@ -158,42 +164,13 @@
         const corePaperTabsContainer = document.getElementById('paper-tabs');
         const appPaperTabsContainer = document.getElementById('application-paper-tabs');
         const mathPaperTabsContainer = document.getElementById('math-paper-tabs');
+        const advancedPaperTabsContainer = document.getElementById('advanced-paper-tabs'); // New container
         const paperViewerTitle = document.getElementById('paper-viewer-title');
         const paperViewerDescription = document.getElementById('paper-viewer-description');
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
 
-        // Page Metadata for social media
-        const pageMetadata = {
-            '': {
-                title: "Keenan Leggett - AI Researcher and Information Architect",
-                description: "A portfolio of foundational work on the Harmony Optimization Protocol (H.O.P.), a new paradigm for Artificial General Intelligence.",
-                image: "images/headshot.png"
-            },
-            'about': {
-                title: "About Keenan Rogerson Leggett",
-                description: "Keenan Leggett's official portfolio page detailing his journey and philosophical approach to building Artificial General Intelligence.",
-                image: "images/headshot.png"
-            },
-            'app1': {
-                title: "H.O.P. as an Aesthetic Engine",
-                description: "A paper on a new framework for algorithmic art curation and discovery rooted in the Harmony Optimization Protocol.",
-                image: "images/aesthetic_engine.png" // Placeholder image for the aesthetic paper
-            },
-            'app2': {
-                title: "Decoherence as Dissonance Resolution",
-                description: "A novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance.",
-                image: "images/decoherence_dissonance.png" // Placeholder image for the decoherence paper
-            },
-            'app3': {
-                title: "Educational Harmony",
-                description: "An AGI-driven educational framework that uses the H.O.P. to monitor and promote intellectual coherence in students, fostering a deeply ethical and auditable learning ecosystem.",
-                image: "images/educational_harmony.png" // Placeholder image for the education paper
-            }
-        };
-        
         const corePapers = [
             { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "./papers/comprehensive_overview.pdf", summary: "A foundational document specifying the H.O.P. architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Specification" },
-            { id: 'paper2', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "Cognitive Funnel" },
             { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "./papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within H.O.P., treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "Cognitive Economics" },
             { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "./papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the H.O.P. architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "Practical H.O.P." },
             { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "./papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "Neurobiological H.O.P." }
@@ -210,17 +187,12 @@
             { id: 'paper7', title: "A Formalism for Metaphysical Topological Computing", file: "./papers/godel.pdf", summary: "This paper provides a mathematical foundation for a model of reality where concepts are formal objects within a universal graph. It recasts Gödel's incompleteness theorems as structural properties of this graph and introduces a topological framework to analyze the logical structure of reality.", abbreviated: "Gödel & Metaphysics" },
             { id: 'paper8', title: "The Dynamically Expanding Formal System (DEFS)", file: "./papers/proof.pdf", summary: "This paper introduces a Dynamically Expanding Formal System (DEFS) and provides mathematical proofs demonstrating how it perpetually resolves its own incompleteness while creating new, higher-order incompleteness.", abbreviated: "DEFS Proofs" }
         ];
-        
-        // Function to update meta tags dynamically for social sharing
-        const setPageMetadata = (key) => {
-            const meta = pageMetadata[key] || pageMetadata[''];
-            document.title = meta.title;
-            document.querySelector('meta[property="og:title"]').setAttribute('content', meta.title);
-            document.querySelector('meta[property="og:description"]').setAttribute('content', meta.description);
-            document.querySelector('meta[property="og:image"]').setAttribute('content', meta.image);
-            // Add other meta tags if needed for Twitter, etc.
-        };
 
+        const advancedPapers = [
+            { id: 'advanced1', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "Cognitive Funnel (ACF)" },
+            { id: 'advanced2', title: "A Formalism for Veridical Coherence via Wasserstein Distance", file: "./papers/veridical.pdf", summary: "A rigorous mathematical specification for an alternative method to calculate Veridical Dissonance using Wasserstein distance, measuring the structural 'work' required to align the system's beliefs with ground-truth axioms.", abbreviated: "Wasserstein Veridicality" }
+        ];
+        
         const renderPaperTabs = (paperList, container) => {
             paperList.forEach(paper => {
                 const a = document.createElement('a');
@@ -237,39 +209,12 @@
             paperViewerTitle.textContent = title;
             paperViewerDescription.textContent = summary;
             
-            if (file.endsWith('.pdf')) {
-                paperViewerFrame.src = file;
-                paperViewerFrame.classList.remove('hidden');
-                document.getElementById('ios-link-container').classList.remove('hidden');
-                // Make sure the preformatted content is hidden if a PDF is loaded
-                if (paperViewerFrame.contentDocument.body.querySelector('pre')) {
-                    paperViewerFrame.contentDocument.body.querySelector('pre').style.display = 'none';
-                }
-            } else if (file.endsWith('.md')) {
-                fetch(file)
-                    .then(response => response.text())
-                    .then(markdown => {
-                        let content = paperViewerFrame.contentDocument.body.querySelector('pre');
-                        if (!content) {
-                            content = document.createElement('pre');
-                            paperViewerFrame.contentDocument.body.appendChild(content);
-                        }
-                        content.textContent = markdown;
-                        content.classList.add('whitespace-pre-wrap', 'font-mono', 'text-gray-700', 'p-4');
-                        content.style.display = 'block';
-
-                        paperViewerFrame.classList.remove('hidden');
-                        document.getElementById('ios-link-container').classList.add('hidden');
-                        // Clear the iframe src to prevent a file from being displayed at the same time
-                        paperViewerFrame.src = 'about:blank';
-                    });
-            }
+            paperViewerFrame.src = file;
+            paperViewerFrame.classList.remove('hidden');
+            document.getElementById('ios-link-container').classList.remove('hidden');
 
             setActiveTab(activeTabId, document.getElementById('content-paper-viewer'));
             document.getElementById('ios-link').href = file;
-
-            // Update metadata for the current paper
-            setPageMetadata(activeTabId.replace('tab-', ''));
         };
         
         const setActiveTab = (activeTabId, activeSection) => {
@@ -293,24 +238,17 @@
         
         const handleInitialLoad = () => {
             const hash = window.location.hash.substring(1);
+            const allPapers = [...corePapers, ...appPapers, ...mathPapers, ...advancedPapers];
+            const targetPaper = allPapers.find(p => p.id === hash);
+
             if (hash === 'about') {
                 setActiveTab('tab-about', document.getElementById('content-about'));
-                setPageMetadata('about');
-            } else if (hash) {
-                const appPaper = appPapers.find(p => p.id === hash);
-                const corePaper = corePapers.find(p => p.id === hash);
-                const mathPaper = mathPapers.find(p => p.id === hash);
-                if (appPaper) {
-                    showPaperViewer(appPaper.file, appPaper.title, appPaper.summary, `tab-${appPaper.id}`);
-                    appPaperTabsContainer.classList.remove('hidden');
-                } else if (corePaper) {
-                    showPaperViewer(corePaper.file, corePaper.title, corePaper.summary, `tab-${corePaper.id}`);
-                } else if (mathPaper) {
-                    showPaperViewer(mathPaper.file, mathPaper.title, mathPaper.summary, `tab-${mathPaper.id}`);
-                    mathPaperTabsContainer.classList.remove('hidden');
-                } else {
-                    setActiveTab('tab-landing', document.getElementById('content-landing'));
-                }
+            } else if (targetPaper) {
+                showPaperViewer(targetPaper.file, targetPaper.title, targetPaper.summary, `tab-${targetPaper.id}`);
+                // Auto-expand the correct section
+                if (appPapers.some(p => p.id === hash)) appPaperTabsContainer.classList.remove('hidden');
+                if (mathPapers.some(p => p.id === hash)) mathPaperTabsContainer.classList.remove('hidden');
+                if (advancedPapers.some(p => p.id === hash)) advancedPaperTabsContainer.classList.remove('hidden');
             } else {
                 setActiveTab('tab-landing', document.getElementById('content-landing'));
             }
@@ -320,31 +258,27 @@
             renderPaperTabs(corePapers, corePaperTabsContainer);
             renderPaperTabs(appPapers, appPaperTabsContainer);
             renderPaperTabs(mathPapers, mathPaperTabsContainer);
+            renderPaperTabs(advancedPapers, advancedPaperTabsContainer); // Render new tabs
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
+                    // e.preventDefault(); // Keep hash in URL
                     const hash = this.getAttribute('href').substring(1);
+                    const allPapers = [...corePapers, ...appPapers, ...mathPapers, ...advancedPapers];
+                    const targetPaper = allPapers.find(p => p.id === hash);
+                    
                     if (hash === 'about') {
                         setActiveTab('tab-about', document.getElementById('content-about'));
-                        setPageMetadata('about');
                     } else if (hash === 'app-papers') {
                         appPaperTabsContainer.classList.toggle('hidden');
                     } else if (hash === 'math-papers') {
                         mathPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'advanced-papers') {
+                        advancedPaperTabsContainer.classList.toggle('hidden');
                     } else if (hash === 'landing') {
                         setActiveTab('tab-landing', document.getElementById('content-landing'));
-                        setPageMetadata('');
-                    } else {
-                        const appPaper = appPapers.find(p => p.id === hash);
-                        const corePaper = corePapers.find(p => p.id === hash);
-                        const mathPaper = mathPapers.find(p => p.id === hash);
-                        if (appPaper) {
-                            showPaperViewer(appPaper.file, appPaper.title, appPaper.summary, `tab-${appPaper.id}`);
-                        } else if (corePaper) {
-                            showPaperViewer(corePaper.file, corePaper.title, corePaper.summary, `tab-${corePaper.id}`);
-                        } else if (mathPaper) {
-                            showPaperViewer(mathPaper.file, mathPaper.title, mathPaper.summary, `tab-${mathPaper.id}`);
-                        }
+                    } else if (targetPaper) {
+                         showPaperViewer(targetPaper.file, targetPaper.title, targetPaper.summary, `tab-${targetPaper.id}`);
                     }
                 });
             });
