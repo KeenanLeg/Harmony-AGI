@@ -74,7 +74,7 @@
                 <div id="problem-section" class="max-w-6xl mx-auto space-y-6">
                     <h3 class="text-3xl font-bold mb-4 leading-tight">The Problem: A Fundamental Flaw in Modern AI</h3>
                     <p class="text-lg leading-relaxed text-gray-700">
-                        Contemporary AI, driven by goal-maximization, is fundamentally flawed. Its reliance on brittle reward signals leaves it vulnerable to pursuing a narrow objective without regard for context or consequences. The Harmony Optimization Protocol (H.O.P.) presents an alternative. Rather than teaching an AGI what to do, we'vedesigned a system that is fundamentally driven by what it doesn't know. By architecting a computational architecture whose core directive is to minimize its own internal inconsistencies, H.O.P. is driven by the perpetual "pain" of its own ignorance. The result is a self-correcting, verifiably safe, and robust blueprint for a new generation of general intelligence.
+                        Contemporary AI, driven by goal-maximization, is fundamentally flawed. Its reliance on brittle reward signals leaves it vulnerable to pursuing a narrow objective without regard for context or consequences. The Harmony Optimization Protocol (H.O.P.) presents an alternative. Rather than teaching an AGI what to do, we've designed a system that is fundamentally driven by what it doesn't know. By architecting a computational architecture whose core directive is to minimize its own internal inconsistencies, H.O.P. is driven by the perpetual "pain" of its own ignorance. The result is a self-correcting, verifiably safe, and robust blueprint for a new generation of general intelligence.
                     </p>
                 </div>
 
@@ -173,7 +173,7 @@
         const corePaperTabsContainer = document.getElementById('paper-tabs');
         const appPaperTabsContainer = document.getElementById('application-paper-tabs');
         const mathPaperTabsContainer = document.getElementById('math-paper-tabs');
-        const advancedPaperTabsContainer = document.getElementById('advanced-paper-tabs'); // New container
+        const advancedPaperTabsContainer = document.getElementById('advanced-paper-tabs');
         const paperViewerTitle = document.getElementById('paper-viewer-title');
         const paperViewerDescription = document.getElementById('paper-viewer-description');
         const paperViewerFrame = document.getElementById('paper-viewer-frame');
@@ -198,6 +198,7 @@
         ];
 
         const advancedPapers = [
+            { id: 'advanced5', title: "A Formal Specification of the Harmonious Field: A Tractable Lie Theoretical Framework for AGI", file: "./papers/lie_hop.pdf", summary: "The definitive architecture of H.O.P., synthesizing the Lie Theoretical framework with a tractable, economically solvent engineering model based on localized Variational Inference and a dynamic, GAT-based geometry.", abbreviated: "The Harmonious Field" },
             { id: 'advanced1', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "Cognitive Funnel (ACF)" },
             { id: 'advanced2', title: "A Formalism for Veridical Coherence via Wasserstein Distance", file: "./papers/veridical.pdf", summary: "A rigorous mathematical specification for an alternative method to calculate Veridical Dissonance using Wasserstein distance, measuring the structural 'work' required to align the system's beliefs with ground-truth axioms.", abbreviated: "Wasserstein Veridicality" },
             { id: 'advanced3', title: "The Dissonance-Gated Activation Field: A Meta-Cognitive Mechanism for Controlled Learning", file: "./papers/gating.pdf", summary: "A novel meta-cognitive mechanism that dynamically controls neuronal activation, enforcing structural integrity through Harsh Gating in response to existential conflicts.", abbreviated: "Dissonance Gating (AD)" },
@@ -269,7 +270,7 @@
             renderPaperTabs(corePapers, corePaperTabsContainer);
             renderPaperTabs(appPapers, appPaperTabsContainer);
             renderPaperTabs(mathPapers, mathPaperTabsContainer);
-            renderPaperTabs(advancedPapers, advancedPaperTabsContainer); // Render new tabs
+            renderPaperTabs(advancedPapers, advancedPaperTabsContainer);
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
