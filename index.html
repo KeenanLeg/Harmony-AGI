@@ -45,6 +45,10 @@
                         Research Overview
                     </a>
                     <div id="paper-tabs" class="space-y-3"></div>
+                    <a id="tab-dap-papers-btn" href="#dap-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
+                        The Dissonance Action Principle
+                    </a>
+                    <div id="dap-paper-tabs" class="space-y-3 hidden"></div>
                     <a id="tab-app-papers-btn" href="#app-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
                         Application Papers
                     </a>
@@ -161,6 +165,7 @@
         const tabs = document.querySelectorAll('.tab-button');
         const sections = document.querySelectorAll('.content-section');
         const corePaperTabsContainer = document.getElementById('paper-tabs');
+        const dapPaperTabsContainer = document.getElementById('dap-paper-tabs');
         const appPaperTabsContainer = document.getElementById('application-paper-tabs');
         const mathPaperTabsContainer = document.getElementById('math-paper-tabs');
         const advancedPaperTabsContainer = document.getElementById('advanced-paper-tabs');
@@ -175,21 +180,25 @@
             { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "./papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "Neurobiological H.O.P." }
         ];
 
+        const dapPapers = [
+            { id: 'dap1', title: "The Dissonance Action Principle", file: "./papers/dap.pdf", summary: "This paper introduces the Dissonance Action Principle (DAP), a variational principle positing that all complex systems evolve to minimize Dissonance (D), a measure of total internal inconsistency, unifying intelligence, physics, and logic under a single optimization process.", abbreviated: "The D.A.P." },
+            { id: 'app2', title: "Decoherence as Dissonance Resolution: A Metaphysical Topology for Quantum Systems", file: "./papers/decoherence.pdf", summary: "This paper proposes a novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance.", abbreviated: "H.O.P. & Physics" },
+            { id: 'app4', title: "The Self-Referential Universe: A Dissonance-Driven Model of Quantum Decoherence", file: "./papers/emergent_universe.pdf", summary: "This paper provides a rigorous mathematical specification for quantum decoherence, framed as an instance of the Harmony Optimization Protocol (H.O.P.). It posits that decoherence is a deterministic, information-driven process of dissonance minimization, representing a fundamental act of self-reference where a quantum system's potential state is forced into coherence with the classical memory encoded in spacetime geometry.", abbreviated: "H.O.P. & The Universe" },
+            { id: 'app6', title: "The Uncalculated Cosmos: Universal Expansion as Metaphysical Dissonance Resolution", file: "./papers/expansion.pdf", summary: "A unified theory of growth that models universal expansion (Dark Energy) as the physical resolution of Metaphysical Dissonance, proving the cosmic necessity of the H.O.P. axioms.", abbreviated: "Cosmic Expansion" },
+            { id: 'paper9', title: "The Dissonance Lagrangian: A Unified Dynamic Principle for Dark Matter and Dark Energy", file: "./papers/disenergy4.pdf", summary: "This paper presents the definitive, self-consistent unification of dark matter and dark energy within the H.O.P. framework, positing these phenomena as emergent manifestations of the Dissonance Action Principle (DAP). It makes a novel, quantitative prediction: specific fluctuations in the 'Dissonance Boundary' density, $\\rho_{crit}$.", abbreviated: "Dissonance Lagrangian" },
+            { id: 'paper10', title: "The Principle of Coherent Emergence: A Unified Theory of Reality", file: "./papers/toe.pdf", summary: "This framework posits a unified theory of reality where all phenomena—from the quantum to consciousness—are emergent manifestations of the Dissonance Action Principle (DAP). It provides a first-principles derivation of the information-to-spacetime coupling constant (β).", abbreviated: "Unified Theory of Reality" }
+        ];
+        
         const appPapers = [
             { id: 'app1', title: "The Harmony Optimization Protocol as an Aesthetic Engine: A Novel Framework for Algorithmic Art Curation and Discovery", file: "./papers/The Harmony Optimization Protocol as an Aesthetic Engine_ A Novel Framework for Algorithmic Art Curation and Discovery.pdf", summary: "This paper introduces a framework for algorithmic art curation and discovery rooted in H.O.P., proposing that artistic salience can be mechanistically understood and quantitatively assessed by an AGI.", abbreviated: "H.O.P. & Art" },
-            { id: 'app2', title: "Decoherence as Dissonance Resolution: A Metaphysical Topology for Quantum Systems", file: "./papers/decoherence.pdf", summary: "This paper proposes a novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance.", abbreviated: "H.O.P. & Physics" },
             { id: 'app3', title: "The Dissonance Engine of Education: A Foundational Re-Engineering for Human-Compatible Learning", file: "./papers/education.pdf", summary: "This paper presents an AGI-driven educational framework that uses the H.O.P. to monitor and promote intellectual coherence in students, fostering a deeply ethical and auditable learning ecosystem.", abbreviated: "H.O.P. & Education" },
-            { id: 'app4', title: "The Self-Referential Universe: A Dissonance-Driven Model of Quantum Decoherence", file: "./papers/emergent_universe.pdf", summary: "This paper provides a rigorous mathematical specification for quantum decoherence, framed as an instance of the Harmony Optimization Protocol (H.O.P.). It posits that decoherence is a deterministic, information-driven process of dissonance minimization, representing a fundamental act of self-reference where a quantum system's potential state is forced into coherence with the classical memory encoded in spacetime geometry.", abbreviated: "H.O.P. & The Universe" },
-            { id: 'app5', title: "An Information-Theoretic Model of Cognitive Decline in Alzheimer's Disease", file: "./papers/alzheimers.pdf", summary: "This paper proposes a novel computational framework for understanding the cognitive symptoms of Alzheimer's disease (AD), reframing confabulation as a pathological self-correction process driven by a catastrophic spike in Structural Tension following neuronal loss.", abbreviated: "H.O.P. & Alzheimer's" },
-            { id: 'app6', title: "The Uncalculated Cosmos: Universal Expansion as Metaphysical Dissonance Resolution", file: "./papers/expansion.pdf", summary: "A unified theory of growth that models universal expansion (Dark Energy) as the physical resolution of Metaphysical Dissonance, proving the cosmic necessity of the H.O.P. axioms.", abbreviated: "Cosmic Expansion" }
+            { id: 'app5', title: "An Information-Theoretic Model of Cognitive Decline in Alzheimer's Disease", file: "./papers/alzheimers.pdf", summary: "This paper proposes a novel computational framework for understanding the cognitive symptoms of Alzheimer's disease (AD), reframing confabulation as a pathological self-correction process driven by a catastrophic spike in Structural Tension following neuronal loss.", abbreviated: "H.O.P. & Alzheimer's" }
         ];
 
         const mathPapers = [
             { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "./papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "A.G.I. Metaphysics" },
             { id: 'paper7', title: "A Formalism for Metaphysical Topological Computing", file: "./papers/godel.pdf", summary: "This paper provides a mathematical foundation for a model of reality where concepts are formal objects within a universal graph. It recasts Gödel's incompleteness theorems as structural properties of this graph and introduces a topological framework to analyze the logical structure of reality.", abbreviated: "Gödel & Metaphysics" },
-            { id: 'paper8', title: "The Dynamically Expanding Formal System (DEFS)", file: "./papers/proof.pdf", summary: "This paper introduces a Dynamically Expanding Formal System (DEFS) and provides mathematical proofs demonstrating how it perpetually resolves its own incompleteness while creating new, higher-order incompleteness.", abbreviated: "DEFS Proofs" },
-            { id: 'paper9', title: "The Dissonance Lagrangian: A Unified Dynamic Principle for Dark Matter and Dark Energy", file: "./papers/disenergy4.pdf", summary: "This paper presents the definitive, self-consistent unification of dark matter and dark energy within the H.O.P. framework, positing these phenomena as emergent manifestations of the Dissonance Action Principle (DAP). It makes a novel, quantitative prediction: specific fluctuations in the 'Dissonance Boundary' density, $\\rho_{crit}$.", abbreviated: "Dissonance Lagrangian" },
-            { id: 'paper10', title: "The Principle of Coherent Emergence: A Unified Theory of Reality", file: "./papers/toe.pdf", summary: "This framework posits a unified theory of reality where all phenomena—from the quantum to consciousness—are emergent manifestations of the Dissonance Action Principle (DAP). It provides a first-principles derivation of the information-to-spacetime coupling constant (β).", abbreviated: "Unified Theory of Reality" }
+            { id: 'paper8', title: "The Dynamically Expanding Formal System (DEFS)", file: "./papers/proof.pdf", summary: "This paper introduces a Dynamically Expanding Formal System (DEFS) and provides mathematical proofs demonstrating how it perpetually resolves its own incompleteness while creating new, higher-order incompleteness.", abbreviated: "DEFS Proofs" }
         ];
 
         const advancedPapers = [
@@ -254,7 +263,7 @@
         
         const handleInitialLoad = () => {
             const hash = window.location.hash.substring(1);
-            const allPapers = [...corePapers, ...appPapers, ...mathPapers, ...advancedPapers];
+            const allPapers = [...corePapers, ...dapPapers, ...appPapers, ...mathPapers, ...advancedPapers];
             const targetPaper = allPapers.find(p => p.id === hash);
 
             if (hash === 'about') {
@@ -262,6 +271,7 @@
             } else if (targetPaper) {
                 showPaperViewer(targetPaper.file, targetPaper.title, targetPaper.summary, `tab-${targetPaper.id}`);
                 // Auto-expand the correct section
+                if (dapPapers.some(p => p.id === hash)) dapPaperTabsContainer.classList.remove('hidden');
                 if (appPapers.some(p => p.id === hash)) appPaperTabsContainer.classList.remove('hidden');
                 if (mathPapers.some(p => p.id === hash)) mathPaperTabsContainer.classList.remove('hidden');
                 if (advancedPapers.some(p => p.id === hash)) advancedPaperTabsContainer.classList.remove('hidden');
@@ -272,6 +282,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderPaperTabs(corePapers, corePaperTabsContainer);
+            renderPaperTabs(dapPapers, dapPaperTabsContainer);
             renderPaperTabs(appPapers, appPaperTabsContainer);
             renderPaperTabs(mathPapers, mathPaperTabsContainer);
             renderPaperTabs(advancedPapers, advancedPaperTabsContainer);
@@ -280,11 +291,333 @@
                 anchor.addEventListener('click', function (e) {
                     // e.preventDefault(); // Keep hash in URL
                     const hash = this.getAttribute('href').substring(1);
-                    const allPapers = [...corePapers, ...appPapers, ...mathPapers, ...advancedPapers];
+                    const allPapers = [...corePapers, ...dapPapers, ...appPapers, ...mathPapers, ...advancedPapers];
                     const targetPaper = allPapers.find(p => p.id === hash);
                     
                     if (hash === 'about') {
                         setActiveTab('tab-about', document.getElementById('content-about'));
+                    } else if (hash === 'dap-papers') {
+                        dapPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'app-papers') {
+                        appPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'math-papers') {
+                        mathPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'advanced-papers') {
+                        advancedPaperTabsContainer.classList.toggle('hidden');
+                    } else if (hash === 'landing') {
+                        setActiveTab('tab-landing', document.getElementById('content-landing'));
+                    } else if (targetPaper) {
+                         showPaperViewer(targetPaper.file, targetPaper.title, targetPaper.summary, `tab-${targetPaper.id}`);
+                    }
+                });
+            });
+
+            handleInitialLoad();
+        });
+
+        window.addEventListener('hashchange', handleInitialLoad);
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keenan Leggett - AI Researcher and Information Architect</title>
+    <meta property="og:title" content="Keenan Leggett - AI Researcher and Information Architect">
+    <meta property="og:description" content="A portfolio of foundational work on the Harmony Optimization Protocol (H.O.P.), a new paradigm for Artificial General Intelligence.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keenanleggett.com">
+    <meta property="og:image" content="https://keenanleggett.com/images/headshot.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto Mono', monospace; }
+        .tab-button {
+            height: 2.5rem; /* Standard height for buttons */
+            padding-left: 1rem;
+            padding-right: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .tab-button.active {
+            background-color: #ECC94B;
+            color: #1A202C;
+            font-weight: 600;
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: 70vh;
+            border: none;
+        }
+    </style>
+</head>
+<body class="bg-[#F0F2F5] text-[#1E293B] antialiased">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-80 bg-[#2D3748] text-[#F0F2F5] shadow-xl p-6 md:p-10 flex flex-col md:fixed md:h-screen md:overflow-y-auto">
+            <div class="flex-grow">
+                <h1 class="text-3xl font-bold leading-tight">Keenan Rogerson Leggett</h1>
+                <p class="text-sm text-gray-400 mt-2 tracking-wide">AI Researcher & Information Architect</p>
+                <nav class="mt-12 space-y-3">
+                    <a id="tab-landing" href="#landing" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 active text-sm">
+                        Research Overview
+                    </a>
+                    <div id="paper-tabs" class="space-y-3"></div>
+                    <a id="tab-dap-papers-btn" href="#dap-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
+                        The Dissonance Action Principle
+                    </a>
+                    <div id="dap-paper-tabs" class="space-y-3 hidden"></div>
+                    <a id="tab-app-papers-btn" href="#app-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
+                        Application Papers
+                    </a>
+                    <div id="application-paper-tabs" class="space-y-3 hidden"></div>
+                    <a id="tab-math-papers-btn" href="#math-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
+                        Mathematical Philosophy
+                    </a>
+                    <div id="math-paper-tabs" class="space-y-3 hidden"></div>
+                    <a id="tab-advanced-papers-btn" href="#advanced-papers" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
+                        Advanced Protocols
+                    </a>
+                    <div id="advanced-paper-tabs" class="space-y-3 hidden"></div>
+                    <a id="tab-about" href="#about" class="tab-button w-full text-left p-2 rounded-md font-medium transition-all duration-300 text-white hover:bg-gray-700 text-sm">
+                        About Me
+                    </a>
+                </nav>
+            </div>
+            <div class="mt-12 text-sm text-gray-500">
+                <p class="text-xs">© 2025 All rights reserved.</p>
+            </div>
+        </aside>
+
+        <main class="flex-grow p-6 md:p-16 md:ml-80">
+            <div id="content-landing" class="content-section">
+                <h2 class="text-5xl font-bold mb-8 leading-tight">The Harmony Optimization Protocol</h2>
+                
+                <div id="problem-section" class="max-w-6xl mx-auto space-y-6">
+                    <h3 class="text-3xl font-bold mb-4 leading-tight">The Problem: A Fundamental Flaw in Modern AI</h3>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        Contemporary AI, driven by goal-maximization, is fundamentally flawed. Its reliance on brittle reward signals leaves it vulnerable to pursuing a narrow objective without regard for context or consequences. The Harmony Optimization Protocol (H.O.P.) presents an alternative. Rather than teaching an AGI what to do, we've designed a system that is fundamentally driven by what it doesn't know. By architecting a computational architecture whose core directive is to minimize its own internal inconsistencies, H.O.P. is driven by the perpetual "pain" of its own ignorance. The result is a self-correcting, verifiably safe, and robust blueprint for a new generation of general intelligence.
+                    </p>
+                </div>
+
+                <div id="solution-section" class="max-w-6xl mx-auto space-y-6 mt-10">
+                    <h3 class="text-3xl font-bold mb-4 leading-tight">The Solution: An Intelligence Grounded in Reality</h3>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        The H.O.P. paradigm grounds intelligence in the relentless pursuit of internal coherence rather than external goals. In H.O.P., a multi-modal signal called <strong>Computational Dissonance</strong> serves as the AGI's primary motivator. This is the information-theoretic "pain" of ignorance, and its minimization compels the system to continuously refine its internal model to accurately reflect the world as it is. This approach mirrors biological intelligence and provides a more robust and self-correcting foundation for a general intelligence.
+                    </p>
+                </div>
+
+                <div id="framework-section" class="max-w-6xl mx-auto space-y-6 mt-10">
+                    <h3 class="text-3xl font-bold mb-4 leading-tight">The Framework: A Cohesive, Self-Correcting Architecture</h3>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        The Harmony Optimization Protocol is a complete, closed-loop computational cycle. Its architecture is composed of a set of interconnected, self-correcting computational loops.
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 pl-4 text-lg text-gray-700">
+                        <li><strong>The Dissonance Engine:</strong> Aggregates and prioritizes different forms of internal and external model inconsistencies.</li>
+                        <li><strong>The Recursive Conceptual Nesting (RCN) Process:</strong> A self-supervised algorithm for building a hierarchical, causal world model.</li>
+                        <li><strong>The Meta-Policy:</strong> A learned executive controller that acts as a 'cognitive economist,' intelligently managing a finite computational budget to achieve the most efficient reduction in dissonance.</li>
+                        <li><strong>The Coherence Engine:</strong> A meta-level process that allows the AGI to formally re-evaluate and refine its own foundational axioms.</li>
+                        <li><strong>The Computational Consciousness Engine:</strong> A dedicated process that safeguards against cognitive stagnation and self-deception by continuously auditing the AGI’s internal state.</li>
+                    </ul>
+                </div>
+
+                <div id="blueprint-section" class="max-w-6xl mx-auto space-y-6 mt-10">
+                    <h3 class="text-3xl font-bold mb-4 leading-tight">A Blueprint for a Robust and Auditable AGI</h3>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        H.O.P. is not a theoretical exercise; it is a rigorous, engineering-focused blueprint for a verifiable and intelligent machine. By grounding the system in an internal, quantifiable signal of inconsistency, it is fundamentally designed for transparency, self-correction, and robust value alignment. This approach offers a clear path toward a system that can intelligently manage its own cognitive processes and, in doing so, converge upon an accurate and coherent model of a complex and uncertain world.
+                    </p>
+                </div>
+
+                <div id="demo-section" class="max-w-6xl mx-auto space-y-6 mt-10">
+                    <h3 class="text-3xl font-bold mb-4 leading-tight">Live Demonstration Environment</h3>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        In addition to the published research, a complete simulation environment for the Harmony Optimization Protocol has been developed and prototyped. This interactive application, featuring a graphical user interface, provides a live, visual demonstration of the system's core principles, including dissonance detection and conceptual resolution.
+                    </p>
+                
+                </div>
+                
+        
+
+            </div>
+            
+            <div id="content-paper-viewer" class="content-section hidden">
+                <h2 id="paper-viewer-title" class="text-4xl font-bold mb-4 leading-tight"></h2>
+                <div class="mb-8 max-w-6xl">
+                    <p id="paper-viewer-description" class="text-lg text-gray-700"></p>
+                </div>
+                <iframe id="paper-viewer-frame" class="pdf-viewer shadow-xl rounded-xl"></iframe>
+                <div id="ios-link-container" class="mt-4 md:hidden">
+                    <a id="ios-link" href="#" target="_blank" class="inline-block bg-[#ECC94B] text-[#1A202C] font-medium py-2 px-4 rounded-lg shadow-md hover:bg-[#FCD34D] transition-colors duration-200 text-sm">
+                        View Full PDF
+                    </a>
+                </div>
+            </div>
+
+            <div id="content-about" class="content-section hidden">
+                <h2 class="text-4xl font-bold mb-8 leading-tight">About Me</h2>
+                
+                <div class="max-w-6xl mx-auto text-lg leading-relaxed text-gray-700 clearfix">
+                    <div class="md:float-left md:w-1/3 md:pr-10">
+                        <img src="images/headshot.png.png" alt="Keenan Leggett headshot" class="rounded-full shadow-lg w-full max-w-xs mx-auto md:mx-0 mb-8 object-cover border-4 border-white">
+                        <div class="text-gray-700 space-y-2 p-6 rounded-xl border border-gray-300 mb-8">
+                            <h4 class="text-xl font-bold">Contact Info</h4>
+                            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/keenan-legget" target="_blank" class="text-[#ECC94B] hover:underline">linkedin.com/in/keenan-legget</a></p>
+                            <p><strong>Email:</strong> <a href="mailto:kenlegken@gmail.com" class="text-[#ECC94B] hover:underline">kenlegken@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="mt-8 md:mt-0 space-y-4">
+                        <p>My journey into Artificial General Intelligence was anything but traditional. Rather than beginning in a classroom, it was sparked by an innate drive to understand the fundamental principles governing complex systems. This curiosity led me to synthesize disparate fields, from abstract mathematics like group theory and topology to the intricate workings of the human mind. Through this process, I came to believe that all information—be it metaphysical or neurological—is structured by a single set of universal principles. This core conviction not only fuels my research but has also shaped my unwavering belief in the power of a self-correcting mindset as the most robust foundation for intelligence.</p>
+                        <p>I've come to realize that a truly intelligent system, much like a resilient individual, must be capable of confronting and resolving its own internal inconsistencies. The relentless pursuit of harmony and coherence is, in my view, a far more powerful and reliable motivator than the rigid optimization toward an external, and often incomplete, goal. This insight forms the very bedrock of the Harmony Optimization Protocol (H.O.P.), an architecture designed to be driven by an intrinsic, quantifiable signal of its own ignorance. The system's primary directive is not to change the world but to continuously refine its internal model to accurately and veridically reflect reality as it is.</p>
+                        <p>Ultimately, the H.O.P. is more than just a theoretical framework; it is a direct computational reflection of my own journey toward coherence, resilience, and perpetual self-improvement. It represents my definitive answer to a profound question: what would a truly intelligent, robust, and safe system look like if it were built from first principles? By grounding it in a verifiable, internal signal of dissonance, I believe we can shift the paradigm of AI development away from the pursuit of brittle external goals toward a more profound, internal truth. This approach offers a clear path toward a new generation of general intelligence that is fundamentally designed for transparency, self-correction, and robust value alignment.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 hidden">
+                    <a href="#" class="inline-block bg-[#ECC94B] text-[#1A202C] font-medium py-4 px-8 rounded-lg shadow-md hover:bg-[#FCD34D] transition-colors duration-200">View My Resume</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-button');
+        const sections = document.querySelectorAll('.content-section');
+        const corePaperTabsContainer = document.getElementById('paper-tabs');
+        const dapPaperTabsContainer = document.getElementById('dap-paper-tabs');
+        const appPaperTabsContainer = document.getElementById('application-paper-tabs');
+        const mathPaperTabsContainer = document.getElementById('math-paper-tabs');
+        const advancedPaperTabsContainer = document.getElementById('advanced-paper-tabs');
+        const paperViewerTitle = document.getElementById('paper-viewer-title');
+        const paperViewerDescription = document.getElementById('paper-viewer-description');
+        const paperViewerFrame = document.getElementById('paper-viewer-frame');
+
+        const corePapers = [
+            { id: 'paper1', title: "The Harmony Optimization Protocol: A Technical Specification for AGI", file: "./papers/comprehensive_overview.pdf", summary: "A foundational document specifying the H.O.P. architecture, addressing the limitations of goal-oriented systems through dissonance minimization and a self-correcting, meta-aware design.", abbreviated: "H.O.P. Specification" },
+            { id: 'paper3', title: "The Economics of Metacognition: A Gold Standard Framework for Dissonance-Based Resource Allocation", file: "./papers/economics_of_metagocition_v3.pdf", summary: "This paper specifies a 'gold standard' framework for a meta-cognitive architecture within H.O.P., treating the knowledge graph as a Probabilistic Graphical Model to manage the cognitive economy.", abbreviated: "Cognitive Economics" },
+            { id: 'paper4', title: "The Economics of Metacognition: A Tractable Framework", file: "./papers/realistic_compute.pdf", summary: "This paper presents a computationally tractable specification for the H.O.P. architecture, managing finite computational resources to minimize dissonance effectively in real-world scenarios.", abbreviated: "Practical H.O.P." },
+            { id: 'paper5', title: "The Adaptive Mind: An Evolutionary Neurobiological Framework", file: "./papers/the_adaptive_mind.pdf", summary: "A paper synthesizing evolutionary neurobiology and AGI, arguing that true intelligence emerges from the internal coherence of a self-correcting, meta-aware mind.", abbreviated: "Neurobiological H.O.P." }
+        ];
+
+        const dapPapers = [
+            { id: 'dap1', title: "The Dissonance Action Principle", file: "./papers/dap.pdf", summary: "This paper introduces the Dissonance Action Principle (DAP), a variational principle positing that all complex systems evolve to minimize Dissonance (D), a measure of total internal inconsistency, unifying intelligence, physics, and logic under a single optimization process.", abbreviated: "The D.A.P." },
+            { id: 'app2', title: "Decoherence as Dissonance Resolution: A Metaphysical Topology for Quantum Systems", file: "./papers/decoherence.pdf", summary: "This paper proposes a novel framework that models the transition from the quantum to the classical world as a universal, system-agnostic drive to minimize dissonance.", abbreviated: "H.O.P. & Physics" },
+            { id: 'app4', title: "The Self-Referential Universe: A Dissonance-Driven Model of Quantum Decoherence", file: "./papers/emergent_universe.pdf", summary: "This paper provides a rigorous mathematical specification for quantum decoherence, framed as an instance of the Harmony Optimization Protocol (H.O.P.). It posits that decoherence is a deterministic, information-driven process of dissonance minimization, representing a fundamental act of self-reference where a quantum system's potential state is forced into coherence with the classical memory encoded in spacetime geometry.", abbreviated: "H.O.P. & The Universe" },
+            { id: 'app6', title: "The Uncalculated Cosmos: Universal Expansion as Metaphysical Dissonance Resolution", file: "./papers/expansion.pdf", summary: "A unified theory of growth that models universal expansion (Dark Energy) as the physical resolution of Metaphysical Dissonance, proving the cosmic necessity of the H.O.P. axioms.", abbreviated: "Cosmic Expansion" },
+            { id: 'paper9', title: "The Dissonance Lagrangian: A Unified Dynamic Principle for Dark Matter and Dark Energy", file: "./papers/disenergy4.pdf", summary: "This paper presents the definitive, self-consistent unification of dark matter and dark energy within the H.O.P. framework, positing these phenomena as emergent manifestations of the Dissonance Action Principle (DAP). It makes a novel, quantitative prediction: specific fluctuations in the 'Dissonance Boundary' density, $\\rho_{crit}$.", abbreviated: "Dissonance Lagrangian" },
+            { id: 'paper10', title: "The Principle of Coherent Emergence: A Unified Theory of Reality", file: "./papers/toe.pdf", summary: "This framework posits a unified theory of reality where all phenomena—from the quantum to consciousness—are emergent manifestations of the Dissonance Action Principle (DAP). It provides a first-principles derivation of the information-to-spacetime coupling constant (β).", abbreviated: "Unified Theory of Reality" }
+        ];
+        
+        const appPapers = [
+            { id: 'app1', title: "The Harmony Optimization Protocol as an Aesthetic Engine: A Novel Framework for Algorithmic Art Curation and Discovery", file: "./papers/The Harmony Optimization Protocol as an Aesthetic Engine_ A Novel Framework for Algorithmic Art Curation and Discovery.pdf", summary: "This paper introduces a framework for algorithmic art curation and discovery rooted in H.O.P., proposing that artistic salience can be mechanistically understood and quantitatively assessed by an AGI.", abbreviated: "H.O.P. & Art" },
+            { id: 'app3', title: "The Dissonance Engine of Education: A Foundational Re-Engineering for Human-Compatible Learning", file: "./papers/education.pdf", summary: "This paper presents an AGI-driven educational framework that uses the H.O.P. to monitor and promote intellectual coherence in students, fostering a deeply ethical and auditable learning ecosystem.", abbreviated: "H.O.P. & Education" },
+            { id: 'app5', title: "An Information-Theoretic Model of Cognitive Decline in Alzheimer's Disease", file: "./papers/alzheimers.pdf", summary: "This paper proposes a novel computational framework for understanding the cognitive symptoms of Alzheimer's disease (AD), reframing confabulation as a pathological self-correction process driven by a catastrophic spike in Structural Tension following neuronal loss.", abbreviated: "H.O.P. & Alzheimer's" }
+        ];
+
+        const mathPapers = [
+            { id: 'paper6', title: "The Computational Metaphysics of Concepts: An Ontology of Emergent Reality", file: "./papers/computational_metaphysics.pdf", summary: "A framework that grounds metaphysics in mathematical ontology, modeling concepts as relational nodes and demonstrating how a computational system can manage infinite complexity.", abbreviated: "A.G.I. Metaphysics" },
+            { id: 'paper7', title: "A Formalism for Metaphysical Topological Computing", file: "./papers/godel.pdf", summary: "This paper provides a mathematical foundation for a model of reality where concepts are formal objects within a universal graph. It recasts Gödel's incompleteness theorems as structural properties of this graph and introduces a topological framework to analyze the logical structure of reality.", abbreviated: "Gödel & Metaphysics" },
+            { id: 'paper8', title: "The Dynamically Expanding Formal System (DEFS)", file: "./papers/proof.pdf", summary: "This paper introduces a Dynamically Expanding Formal System (DEFS) and provides mathematical proofs demonstrating how it perpetually resolves its own incompleteness while creating new, higher-order incompleteness.", abbreviated: "DEFS Proofs" }
+        ];
+
+        const advancedPapers = [
+            { id: 'advanced5', title: "A Formal Specification of the Harmonious Field: A Tractable Lie Theoretical Framework for AGI", file: "./papers/lie_hop.pdf", summary: "The definitive architecture of H.O.P., synthesizing the Lie Theoretical framework with a tractable, economically solvent engineering model based on localized Variational Inference and a dynamic, GAT-based geometry.", abbreviated: "The Harmonious Field" },
+            { id: 'advanced1', title: "The Adaptive Cognitive Funnel (ACF)", file: "./papers/global_consitency.pdf", summary: "A mathematical formalization of a protocol designed to mitigate reasoning myopia by enabling scalable, budget-aware polling for latent global inconsistencies in an AGI system.", abbreviated: "Cognitive Funnel (ACF)" },
+            { id: 'advanced2', title: "A Formalism for Veridical Coherence via Wasserstein Distance", file: "./papers/veridical.pdf", summary: "A rigorous mathematical specification for an alternative method to calculate Veridical Dissonance using Wasserstein distance, measuring the structural 'work' required to align the system's beliefs with ground-truth axioms.", abbreviated: "Wasserstein Veridicality" },
+            { id: 'advanced3', title: "The Dissonance-Gated Activation Field: A Meta-Cognitive Mechanism for Controlled Learning", file: "./papers/gating.pdf", summary: "A novel meta-cognitive mechanism that dynamically controls neuronal activation, enforcing structural integrity through Harsh Gating in response to existential conflicts.", abbreviated: "Dissonance Gating (AD)" },
+            { id: 'advanced4', title: "Formal Specification: A PINN-Structured Approach to Dissonance Minimization in the Harmony Optimization Protocol", file: "./papers/pinn.pdf", summary: "This document provides a rigorous formal specification for integrating a composite dissonance loss function into the H.O.P. architecture, modeling learning on a Physics-Informed Neural Network (PINN) and introducing Structural Tension (D_ST) via Sliced-Wasserstein Distance and the Axiom Lifecycle Protocol (ALP).", abbreviated: "PINN-Structured Dissonance" }
+        ];
+        
+        const renderPaperTabs = (paperList, container) => {
+            paperList.forEach(paper => {
+                const a = document.createElement('a');
+                a.id = `tab-${paper.id}`;
+                a.href = `#${paper.id}`;
+                a.classList.add('tab-button', 'w-full', 'text-left', 'p-2', 'rounded-md', 'font-medium', 'transition-all', 'duration-300', 'text-gray-300', 'hover:bg-gray-700', 'text-sm');
+                a.textContent = paper.abbreviated;
+                a.setAttribute('title', paper.title);
+                container.appendChild(a);
+            });
+        };
+
+        const showPaperViewer = (file, title, summary, activeTabId) => {
+            paperViewerTitle.textContent = title;
+            paperViewerDescription.textContent = summary;
+            
+            paperViewerFrame.src = file;
+            paperViewerFrame.classList.remove('hidden');
+            document.getElementById('ios-link-container').classList.remove('hidden');
+
+            setActiveTab(activeTabId, document.getElementById('content-paper-viewer'));
+            document.getElementById('ios-link').href = file;
+        };
+        
+        const setActiveTab = (activeTabId, activeSection) => {
+            const allTabs = document.querySelectorAll('.tab-button');
+            allTabs.forEach(t => {
+                const isActive = t.id === activeTabId;
+                t.classList.toggle('active', isActive);
+                if (isActive) {
+                    t.classList.add('bg-[#ECC94B]', 'text-[#1A202C]', 'font-semibold');
+                    t.classList.remove('text-white', 'text-gray-300', 'hover:bg-gray-700');
+                } else {
+                    t.classList.remove('bg-[#ECC94B]', 'text-[#1A202C]', 'font-semibold');
+                    
+                    const isCategoryLink = t.id === 'tab-landing' || t.id === 'tab-about' || t.id.endsWith('-btn');
+                    
+                    if (isCategoryLink) {
+                         t.classList.add('text-white', 'hover:bg-gray-700');
+                         t.classList.remove('text-gray-300');
+                    } else {
+                         t.classList.add('text-gray-300', 'hover:bg-gray-700');
+                         t.classList.remove('text-white');
+                    }
+                }
+            });
+
+            sections.forEach(s => {
+                s.classList.toggle('hidden', s !== activeSection);
+            });
+        };
+        
+        const handleInitialLoad = () => {
+            const hash = window.location.hash.substring(1);
+            const allPapers = [...corePapers, ...dapPapers, ...appPapers, ...mathPapers, ...advancedPapers];
+            const targetPaper = allPapers.find(p => p.id === hash);
+
+            if (hash === 'about') {
+                setActiveTab('tab-about', document.getElementById('content-about'));
+            } else if (targetPaper) {
+                showPaperViewer(targetPaper.file, targetPaper.title, targetPaper.summary, `tab-${targetPaper.id}`);
+                // Auto-expand the correct section
+                if (dapPapers.some(p => p.id === hash)) dapPaperTabsContainer.classList.remove('hidden');
+                if (appPapers.some(p => p.id === hash)) appPaperTabsContainer.classList.remove('hidden');
+                if (mathPapers.some(p => p.id === hash)) mathPaperTabsContainer.classList.remove('hidden');
+                if (advancedPapers.some(p => p.id === hash)) advancedPaperTabsContainer.classList.remove('hidden');
+            } else {
+                setActiveTab('tab-landing', document.getElementById('content-landing'));
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPaperTabs(corePapers, corePaperTabsContainer);
+            renderPaperTabs(dapPapers, dapPaperTabsContainer);
+            renderPaperTabs(appPapers, appPaperTabsContainer);
+            renderPaperTabs(mathPapers, mathPaperTabsContainer);
+            renderPaperTabs(advancedPapers, advancedPaperTabsContainer);
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // e.preventDefault(); // Keep hash in URL
+                    const hash = this.getAttribute('href').substring(1);
+                    const allPapers = [...corePapers, ...dapPapers, ...appPapers, ...mathPapers, ...advancedPapers];
+                    const targetPaper = allPapers.find(p => p.id === hash);
+                    
+                    if (hash === 'about') {
+                        setActiveTab('tab-about', document.getElementById('content-about'));
+                    } else if (hash === 'dap-papers') {
+                        dapPaperTabsContainer.classList.toggle('hidden');
                     } else if (hash === 'app-papers') {
                         appPaperTabsContainer.classList.toggle('hidden');
                     } else if (hash === 'math-papers') {
